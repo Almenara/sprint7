@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="grid">
+      <div class="g-col-6">
+            <div class="col-12">
+                <h1>¿Qué quieres hacer?</h1>
+                <form action="">
+                    <ng-container *ngFor="let product of products, index as i">
+                        <app-field (addToCart)="getAddProduct($event)" (removeToCart)="getRemoveProduct($event)" [product]="product"></app-field>
+                    </ng-container>
+                </form>
+            </div>
+            <div class="col-12">Total: <span id="total">{{total}}€</span></div>
+        </div>
+    </div>
+</div>
+  

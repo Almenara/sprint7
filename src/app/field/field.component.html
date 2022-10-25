@@ -1,0 +1,7 @@
+<div class="form-check">
+    <!--input class="form-check-input" type="checkbox" (change)="addToCart($event, product.id)" [value]="product.price" [id]="product.name"-->
+    <input class="form-check-input" type="checkbox" [(ngModel)]="state" (change)="sendToCart($event, product.id)" [id]="product.name">
+    <label class="form-check-label" [attr.for]="product.name">
+        {{product.text}} ({{product.price}}€)
+    </label>
+</div>
