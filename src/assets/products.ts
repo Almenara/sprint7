@@ -5,7 +5,7 @@ export const json_products = [
         text: "Una página Web",
         price: 500,
         maxQuantity: 1,
-        feature:[
+        features:[
             {
                 id: 0,
                 name: "pages",
@@ -28,7 +28,7 @@ export const json_products = [
         text: "Una consultoria SEO",
         price: 300,
         maxQuantity: 1,
-        feature: [] 
+        features: [] 
     },
     {
         id: 2,
@@ -36,6 +36,6 @@ export const json_products = [
         text: "Una campaña de Google Ads",
         price: 200,
         maxQuantity: 1,
-        feature: []        
+        features: []        
     }
 ]

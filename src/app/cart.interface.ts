@@ -1,9 +1,9 @@
 export interface product_cart {
     id: number,
-    quantity:number
-    feature: product_cart_feature[]
+    quantity: number,
+    features: product_cart_feature[]
 }
-interface product_cart_feature {
+export interface product_cart_feature {
     id: number,
     quantity:number
 }

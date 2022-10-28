@@ -8,12 +8,10 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./field.component.scss']
 })
 export class FieldComponent implements OnInit {
-  @Input() product:product;
-  @Output() addToCart = new EventEmitter<number>();
-  @Output() removeToCart = new EventEmitter<number>();
+  @Input() product : product;
+  @Output() addToCart = new EventEmitter<object>();
   
-  public state:boolean;
-  public isChecked = false;
+  public state : boolean;
   
   constructor() {
   }
@@ -21,7 +19,7 @@ export class FieldComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  sendToCart(e:Event, id:number):void{
-    this.state ? this.addToCart.emit(id) : this.removeToCart.emit(id);
+  sendToCart(e: Event, featureId: number | null = null): void{
+    this.addToCart.emit({productId:this.product.id, featureId:featureId, quantity: featureId == null ? Number(this.state) : Number((e.target as HTMLInputElement).value)});
   }
 }

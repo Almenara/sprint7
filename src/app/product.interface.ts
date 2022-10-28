@@ -3,13 +3,13 @@ export interface product {
     name: string,
     text: string,
     price: number,
-    maxQuantity: number | null
-    feature: feature[]
+    maxQuantity: number | null,
+    features: feature[]
 }
 interface feature {
     id: number,
     name: string,
     text: string,
-    price: number
+    price: number,
     maxQuantity: number | null
 }

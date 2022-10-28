@@ -1,3 +1,4 @@
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -8,17 +9,23 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { FieldComponent } from './field/field.component';
 
+const appRoutes:Routes = [
+  {path: "", component:HomeComponent},
+  {path: "home", component:HomeComponent}
+]
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FieldComponent
+    FieldComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
-    FormsModule
+    CommonModule, 
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

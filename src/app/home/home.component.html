@@ -5,7 +5,7 @@
                 <h1>¿Qué quieres hacer?</h1>
                 <form action="">
                     <ng-container *ngFor="let product of products, index as i">
-                        <app-field (addToCart)="getAddProduct($event)" (removeToCart)="getRemoveProduct($event)" [product]="product"></app-field>
+                        <app-field (addToCart)="setCart($any($event))" [product]="product"></app-field>
                     </ng-container>
                 </form>
             </div>
