@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,14 +18,15 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    FieldComponent,
+    FieldComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule, 
+    RouterModule.forRoot(appRoutes),
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

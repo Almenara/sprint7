@@ -2,6 +2,7 @@ import { product } from '../product.interface';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgModel } from '@angular/forms';
 
+
 @Component({
   selector: 'app-field',
   templateUrl: './field.component.html',

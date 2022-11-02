@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
-import { product } from '../product.interface'
-import { product_cart } from '../cart.interface'
+import { product, feature } from '../product.interface'
+import { product_cart, product_cart_feature } from '../cart.interface'
 import { json_products } from '../../assets/products';
 
 @Component({
@@ -11,9 +11,11 @@ import { json_products } from '../../assets/products';
 })
 export class HomeComponent implements OnInit {
   
-  products: product[] = json_products;
-  cart: product_cart[] = [];
-  total: number = 0;
+  public products: product[] = json_products;
+  public cart: product_cart[] = [];
+  public total: number = 0;
+
+  public state : boolean;
 
   constructor() { }
 
@@ -34,7 +36,7 @@ export class HomeComponent implements OnInit {
         if(!featureExist && productToCart.quantity != 0){
           this.cart.filter((product, index) => { 
             if(product.id === productToCart.productId){
-              this.cart[index].features.push({id : productToCart.featureId, quantity : productToCart.quantity} as unknown as any)
+              this.cart[index].features.push({id : productToCart.featureId, quantity : productToCart.quantity} as unknown as product_cart_feature)
             }
           })
         }
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit {
     })
     console.log(this.cart)
   }
-  getTotalFeatures(cartProductId:number, cartFeatures:any){
+  getTotalFeatures(cartProductId:number, cartFeatures:product_cart_feature[]){
     let total = 0;
     let productFeatures = this.products.filter( product => product.id == cartProductId )[0].features
     cartFeatures.map((cartFeature: { id: number; quantity: number; }) => {
