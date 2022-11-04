@@ -1,0 +1,13 @@
+<div  [formGroup]="panelForm" *ngIf="product.features.length > 0" class="collapse" [id]="'features' + product.id">
+    <div class="p-3 pb-2 mb-4 mt-2 card"> 
+        <div class="mb-3" *ngFor="let feature of product.features, let i = index">
+            <label [for]="'feature' + feature.id" class="form-label"> {{feature.text}} ({{feature.price}}€)</label>
+            <!--no encuentro la manera de poner una condición en [value] que no sea un ternario-->
+            <input type="number" [id]="'feature' + feature.id" [formControlName]="'feature' + i" class="form-control" min="0" [defaultValue]="0" (keyup)="sendToCart($event, feature.id); total()" (change)="sendToCart($event, feature.id); total()" placeholder="0 ">
+            <span class="form-text text-danger"
+                *ngIf="panelForm.controls['feature' + feature.id].errors && panelForm.controls['feature' + feature.id].touched" >
+                {{feature.text}} debe ser 1 o más 
+            </span>
+        </div>
+    </div>
+</div>

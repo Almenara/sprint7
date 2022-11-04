@@ -2,12 +2,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
+import { ReactiveFormsModule }    from '@angular/forms';
 
+import { TotalService } from './services/total.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { FieldComponent } from './field/field.component';
+import { PanelComponent } from './panel/panel.component';
 
 const appRoutes:Routes = [
   {path: "", component:HomeComponent},
@@ -18,17 +19,18 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    FieldComponent
+    PanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule, 
     RouterModule.forRoot(appRoutes),
-    FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    TotalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
