@@ -6,10 +6,11 @@ export interface product {
     maxQuantity: number | null,
     features: feature[]
 }
-interface feature {
+export interface feature {
     id: number,
     name: string,
     text: string,
+    info: string,
     price: number,
     maxQuantity: number | null
 }

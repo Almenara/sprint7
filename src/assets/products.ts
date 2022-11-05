@@ -10,6 +10,7 @@ export const json_products = [
                 id: 0,
                 name: "pages",
                 text: "Número de páginas",
+                info: "Indique el número de páginas que tendrá su web",
                 price: 30,
                 maxQuantity: null,
             },
@@ -17,6 +18,7 @@ export const json_products = [
                 id: 1,
                 name: "language",
                 text: "Número de idiomas",
+                info: "Indique el número de idiomas que tendrá su web",
                 price: 30,
                 maxQuantity: null,
             }
