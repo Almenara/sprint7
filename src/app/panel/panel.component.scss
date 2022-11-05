@@ -1,8 +1,11 @@
-/*input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button,
-input[type=number] {
-    appearance: none;
-    -webkit-appearance: none;
-    margin: 0;
-    -moz-appearance: textfield;
-}*/
+.card{
+    border: 2px solid black;
+
+    label{
+        margin-bottom: 0;
+    }
+    input{
+        max-width: 80px;
+        text-align: center;
+    }
+}
