@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { PanelComponent } from './panel/panel.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { ModalComponent } from './modal/modal.component';
 
 const appRoutes:Routes = [
   {path: "", component:HomeComponent},
@@ -24,7 +25,8 @@ const appRoutes:Routes = [
     HomeComponent,
     PanelComponent,
     ErrorPageComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

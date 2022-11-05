@@ -1,7 +1,8 @@
 <div  [formGroup]="panelForm" *ngIf="product.features.length > 0" class="collapse" [id]="'features' + product.id">
     <div class="p-4 pb-2 mt-2 mb-3 card"> 
         <div class="d-flex flex-column" *ngFor="let feature of product.features, let i = index">
-            <div class="d-flex justify-content-start gap-3">
+            <div class="d-flex justify-content-start align-items-center gap-3">
+                
                 <label [for]="'feature' + feature.id" class="form-label d-flex align-items-center"> {{feature.text}} ({{feature.price}}€)</label>
 
                 <button class="btn btn btn-warning" (click)="up(feature.id); total()"> + </button>
@@ -10,6 +11,8 @@
 
                 <button class="btn btn btn-warning" (click)="down(feature.id); total()"> - </button>
 
+                <div class="btn-info" data-bs-toggle="modal" data-bs-target="#infoModal" (click)="modal.changeTitle(feature.text); modal.changeContent(feature.info) ">i</div>
+                
             </div>
             <div class="mb-3">
                 <span class="form-text text-danger"
@@ -20,3 +23,4 @@
         </div>
     </div>
 </div>
+<app-modal #modal> </app-modal>

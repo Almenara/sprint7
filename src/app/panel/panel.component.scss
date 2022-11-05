@@ -1,11 +1,37 @@
 .card{
     border: 2px solid black;
-
+    max-width: 530px;
     label{
         margin-bottom: 0;
     }
     input{
         max-width: 80px;
         text-align: center;
+    }
+    .btn{
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 0px;
+        min-height: 38px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 50px;
+        padding-bottom: 12px;
+    }
+    .btn-info{
+        height: 30px;
+        width: 30px;
+        background-color: gray;
+        line-height: 10px;
+        color:white;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: Menlo, Consolas, monospace;
+        padding: 10px 0;
+        text-align: center;
+        border-radius: 20px;
+        cursor: pointer;
+
     }
 }

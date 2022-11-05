@@ -1,3 +1,4 @@
+import { ModalComponent } from './modal/modal.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'presupuesto',
     component: HomeComponent
+  },
+  {
+    path: 'modal',
+    component: ModalComponent
   },
   {
     path: '**',
