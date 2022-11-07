@@ -65,6 +65,6 @@ export class HomeComponent implements OnInit {
 
   saveBudget(){
     this.budget.total = this.total
-    this.budgetList = this.cartService.saveBudget(this.budget);
+    this.cartService.saveBudget(this.budget);
   }
 }

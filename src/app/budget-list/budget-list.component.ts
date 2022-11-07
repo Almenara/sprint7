@@ -1,5 +1,8 @@
-import { Budget } from './../budget.interface';
+
 import { Component, Input, OnInit } from '@angular/core';
+
+import { Budget } from './../budget.interface';
+import { CartService } from './../services/cart.service';
 
 @Component({
   selector: 'app-budget-list',
@@ -7,10 +10,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./budget-list.component.scss']
 })
 export class BudgetListComponent implements OnInit {
-  @Input() budgetList: Budget[];
-  constructor() { }
+  
+  public budgetList:Budget[] = [];
+  constructor(private cartservice: CartService) {}
 
   ngOnInit(): void {
+      this.budgetList = this.cartservice.getBugetList();
   }
 
 }

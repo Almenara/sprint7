@@ -1,56 +1,55 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-lg-7">
-            <div class="col-12">
-                <div class="d-flex justify-content-start align-items-center mt-5 gap-3">
-                    <a routerLink="/" class="btn btn-secondary"> < </a>
-                    <h1>¿Qué quieres hacer?</h1>
-                </div>
-
-                <form [formGroup]="mainForm" (ngSubmit)="saveBudget()">
-                    <div class="d-flex flex-column flex-sm-row mt-4 gap-3">
-                        <div class="mb-3">
-                            <input type="text" [(ngModel)]="budget.client" formControlName="client" class="form-control" name="client" placeholder="Nombre cliente">
-                            <span class="form-text text-danger"
-                            *ngIf="this.mainForm.controls['client'].errors && this.mainForm.controls['client'].touched" >
-                                Este campo es obligatorio y tener mas de 3 carácteres.
-                            </span>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" formControlName="budgetName" [(ngModel)]="budget.budgetName" class="form-control" name="budgetName" placeholder="Nombre presupuesto">
-                            <span class="form-text text-danger"
-                            *ngIf="this.mainForm.controls['budgetName'].errors && this.mainForm.controls['budgetName'].touched" >
-                                Este campo es obligatorio y tener mas de 3 carácteres.
-                            </span>
-                        </div>
-                    </div>
-                    <ng-container *ngFor="let product of products, index as i">
-                        <div class="form-check">
-                            <input  class="form-check-input" 
-                                    formControlName="product" 
-                                    [value]="1" 
-                                    type="checkbox" 
-                                    data-bs-toggle="collapse" 
-                                    [attr.data-bs-target]="'#features' + product.id" 
-                                    [attr.aria-expanded]="false" 
-                                    (change)="sendToCart(product.id, product.text, $event)" 
-                                    [id]="product.name"
-                                    [checked]="true">
-                            <label class="form-check-label" [attr.for]="product.name" (change)="true">
-                                {{product.text}} ({{product.price}}€)
-                            </label>
-                        </div>
-                        
-                        <app-panel (addToTotal)="setTotal()" [product]="product" [mainForm]="mainForm"></app-panel>
-                        
-                    </ng-container>
-                    <div class="col-12 mt-2">Total: <span id="total">{{total}}€</span></div>
-                    <button [disabled]="!this.mainForm.valid" type="submit" class="btn btn-primary mt-5">Guardar</button>
-                </form>
+        <div class="col-12">
+            <div class="d-flex justify-content-start align-items-center mt-5 gap-3">
+                <a routerLink="/" class="btn btn-secondary"> < </a>
+                <h1>¿Qué quieres hacer?</h1>
             </div>
         </div>
+        <div class="col-12 col-lg-7">
+            <form [formGroup]="mainForm" (ngSubmit)="saveBudget()">
+                <div class="d-flex flex-column flex-sm-row mt-4 gap-3">
+                    <div class="mb-3">
+                        <input type="text" [(ngModel)]="budget.client" formControlName="client" class="form-control" name="client" placeholder="Nombre cliente">
+                        <span class="form-text text-danger"
+                        *ngIf="this.mainForm.controls['client'].errors && this.mainForm.controls['client'].touched" >
+                            Este campo es obligatorio y tener mas de 3 carácteres.
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" formControlName="budgetName" [(ngModel)]="budget.budgetName" class="form-control" name="budgetName" placeholder="Nombre presupuesto">
+                        <span class="form-text text-danger"
+                        *ngIf="this.mainForm.controls['budgetName'].errors && this.mainForm.controls['budgetName'].touched" >
+                            Este campo es obligatorio y tener mas de 3 carácteres.
+                        </span>
+                    </div>
+                </div>
+                <ng-container *ngFor="let product of products, index as i">
+                    <div class="form-check">
+                        <input  class="form-check-input" 
+                                formControlName="product" 
+                                [value]="1" 
+                                type="checkbox" 
+                                data-bs-toggle="collapse" 
+                                [attr.data-bs-target]="'#features' + product.id" 
+                                [attr.aria-expanded]="false" 
+                                (change)="sendToCart(product.id, product.text, $event)" 
+                                [id]="product.name"
+                                [checked]="true">
+                        <label class="form-check-label" [attr.for]="product.name" (change)="true">
+                            {{product.text}} ({{product.price}}€)
+                        </label>
+                    </div>
+                    
+                    <app-panel (addToTotal)="setTotal()" [product]="product" [mainForm]="mainForm"></app-panel>
+                    
+                </ng-container>
+                <div class="col-12 mt-2">Total: <span id="total">{{total}}€</span></div>
+                <button [disabled]="!this.mainForm.valid" type="submit" class="btn btn-primary mt-5">Guardar</button>
+            </form>
+        </div>
         <div class="col-12 col-lg-5">
-            <app-budget-list [budgetList]="budgetList"></app-budget-list>
+            <app-budget-list></app-budget-list>
         </div>
     </div>
 </div>

@@ -88,6 +88,8 @@ export class CartService {
   saveBudget(budget:Budget){
     budget.products = this._cartProducts.slice();
     this._budgetList.push(Object.assign({},budget))
+  }
+  getBugetList(){
     return this._budgetList;
   }
 }
