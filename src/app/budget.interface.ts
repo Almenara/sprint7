@@ -1,18 +1,20 @@
 
 export interface Budget{
+    id?: number,
     client: string,
     budgetName: string,
-    total?:number,
-    products?: product_budget[]
+    budgetDate?: Date | null,
+    total?: number,
+    products?: Product_budget[]
 }
-export interface product_budget {
+export interface Product_budget {
     id: number,
     name?: string,
     quantity: number,
-    features: product_budget_feature[]
+    features: Product_budget_feature[]
 }
-export interface product_budget_feature {
+export interface Product_budget_feature {
     id: number,
     name?: string,
-    quantity:number
+    quantity: number
 }
