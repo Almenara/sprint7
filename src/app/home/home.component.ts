@@ -1,5 +1,6 @@
+import { Budget } from './../budget.interface';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CartService } from './../services/cart.service';
 import { ProductsService } from './../services/products.service';
@@ -12,26 +13,34 @@ import { ProductsService } from './../services/products.service';
 })
 export class HomeComponent implements OnInit {
   
-  mainForm: FormGroup = this.fb.group({
+  public mainForm: FormGroup = this.fb.group({
+    client: ["", [Validators.required, Validators.minLength(3)]],
+    budgetName: ["", [Validators.required, Validators.minLength(3)]],
     product: [false]
   })
-  
+
+  public budget: Budget = {
+    client: "",
+    budgetName: ""
+  };
+  public budgetList: Budget[];
+
   public total = 0;
 
   get products(){
     return this.productsService.products; 
   }
-  constructor(private productsService: ProductsService, private cartService: CartService, private fb: FormBuilder) {
 
+  constructor(private productsService: ProductsService, private cartService: CartService, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
   }
 
-  sendToCart(productId:number, e:Event){
+  sendToCart(productId:number, productName:string, e:Event){
     let checked = (e.target as HTMLInputElement).checked;
     
-    this.cartService.setCart({productId, featureId : null, quantity : Number(checked)});
+    this.cartService.setCart({productId, productName, featureId : null, quantity : Number(checked)});
 
     if(checked){
       let inputs = (e.target as HTMLInputElement).parentElement?.nextElementSibling?.querySelectorAll('input') ;
@@ -41,7 +50,7 @@ export class HomeComponent implements OnInit {
       this.products.filter(product => { 
         if(product.features.length)
           product.features.map(feature => {
-            this.cartService.setFeaturesCart( product.id, {id: feature.id, quantity: 1})
+            this.cartService.setFeaturesCart( product.id, {id: feature.id, name: feature.name, quantity: 1})
           })
        })
     }
@@ -52,5 +61,10 @@ export class HomeComponent implements OnInit {
 
   setTotal(){
     this.total = this.cartService.getTotal();
+  }
+
+  saveBudget(){
+    this.budget.total = this.total
+    this.cartService.saveBudget(this.budget);
   }
 }

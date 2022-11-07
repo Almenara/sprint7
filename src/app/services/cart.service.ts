@@ -1,3 +1,5 @@
+import { Budget } from './../budget.interface';
+import { cart } from './../cart.interface';
 import { ProductsService } from './products.service';
 import { TotalService } from './total.service';
 import { Injectable } from '@angular/core';
@@ -8,30 +10,35 @@ import { product_cart, product_cart_feature } from '../cart.interface'
   providedIn: 'root'
 })
 export class CartService {
-  private _cart:product_cart[] = [];
+  private _cartProducts:product_cart[] = [];
+  private _cartList:cart[] = [];
+  private _budgetList:Budget[] = [];
 
   get cart(): product_cart[] {
-    return [...this._cart];
+    return [...this._cartProducts];
+  }
+  get cartList(): cart[] {
+    return [...this._cartList];
   }
 
   constructor(private totalSevice: TotalService, private productsService:ProductsService) { }
 
-  setCart(productToCart:{productId : number, featureId? : null, quantity : number}):void{
+  setCart(productToCart:{productId: number, productName: string, featureId?: null, quantity: number}): void{
     let productExist = this.cart.filter(product => product.id == productToCart.productId)[0];
     if(!productExist && productToCart.quantity != 0)
-        this.addProductToCart({id : productToCart.productId, quantity : productToCart.quantity, features : []} as unknown as product_cart);
+        this.addProductToCart({id : productToCart.productId, name : productToCart.productName, quantity : productToCart.quantity, features : []} as unknown as product_cart);
     else
         this.removeProductToCart({id : productToCart.productId, quantity : productToCart.quantity, features : []} as unknown as product_cart);
   }
 
   addProductToCart(product:product_cart){
-    this._cart.push({id : product.id, quantity : product.quantity, features : []} as unknown as product_cart)
+    this._cartProducts.push({id: product.id, name: product.name, quantity : product.quantity, features : []} as unknown as product_cart)
   }
 
   removeProductToCart(product:product_cart){
-    this._cart.filter((productCart, index) => {
+    this._cartProducts.filter((productCart, index) => {
       if(productCart.id == product.id)
-        this._cart.splice(index,1)
+        this._cartProducts.splice(index,1)
     });
   }
 
@@ -52,21 +59,21 @@ export class CartService {
   }
 
   addFeatureToCart(productId:number, feature:product_cart_feature){
-    if(feature.quantity > 0) this._cart.filter(product => product.id == productId)[0].features.push(feature)
+    if(feature.quantity > 0) this._cartProducts.filter(product => product.id == productId)[0].features.push(feature)
   }
 
   removeFeatureToCart(productId:number, feature:product_cart_feature){
-    this._cart.filter((productCart,indexP) => {
+    this._cartProducts.filter((productCart,indexP) => {
       if(productCart.id == productId)
         productCart.features.filter( (featureCart, indexF) => {
           if(featureCart.id == feature.id)
-            this._cart[indexP].features.splice(indexF,1)
+            this._cartProducts[indexP].features.splice(indexF,1)
         })
     })
   }
 
   setFeatureToCart(productId:number, feature:product_cart_feature){
-    this._cart.filter((productCart,indexP) => {
+    this._cartProducts.filter((productCart,indexP) => {
       if(productCart.id == productId)
         productCart.features.map( (featureCart, indexF) => {
           if(featureCart.id == feature.id)
@@ -76,5 +83,13 @@ export class CartService {
   }
   getTotal():number{
     return this.totalSevice.getTotal(this.cart, this.productsService.products)
+  }
+
+  saveBudget(budget:Budget){
+    budget.products = this._cartProducts.slice();
+    this._budgetList.push(Object.assign({},budget))
+  }
+  getBugetList(){
+    return this._budgetList;
   }
 }
