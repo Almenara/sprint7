@@ -16,12 +16,14 @@ export class HomeComponent implements OnInit {
   public mainForm: FormGroup = this.fb.group({
     client: ["", [Validators.required, Validators.minLength(3)]],
     budgetName: ["", [Validators.required, Validators.minLength(3)]],
+    budgetDate: [null, [Validators.required]],
     product: [false]
   })
 
   public budget: Budget = {
     client: "",
-    budgetName: ""
+    budgetName: "",
+    budgetDate: null
   };
   public budgetList: Budget[];
 

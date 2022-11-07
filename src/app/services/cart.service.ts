@@ -87,6 +87,7 @@ export class CartService {
 
   saveBudget(budget:Budget){
     budget.products = this._cartProducts.slice();
+    budget.id = this._budgetList.length;
     this._budgetList.push(Object.assign({},budget))
   }
   getBugetList(){

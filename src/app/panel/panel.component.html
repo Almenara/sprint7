@@ -3,7 +3,7 @@
         <div class="d-flex flex-column" *ngFor="let feature of product.features, let i = index">
             <div class="d-flex flex-column flex-sm-row justify-content-start align-items-center gap-3">
                 <div>
-                    <label [for]="'feature' + feature.id" class="form-label d-flex align-items-center"> {{feature.text}} ({{feature.price}}€)</label>
+                    <label [for]="'feature' + feature.id" class="form-label d-flex align-items-center"> {{feature.text}} ({{ feature.price | currency:'EUR':'symbol':undefined:'es-ES' }})</label>
                 </div>
                 <div class="d-flex gap-3 align-items-center">
                     <button type="button" class="btn btn btn-warning" (click)="up(feature.id); total()"> + </button>

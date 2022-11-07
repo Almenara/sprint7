@@ -9,18 +9,25 @@
         <div class="col-12 col-lg-7">
             <form [formGroup]="mainForm" (ngSubmit)="saveBudget()">
                 <div class="d-flex flex-column flex-sm-row mt-4 gap-3">
-                    <div class="mb-3">
-                        <input type="text" [(ngModel)]="budget.client" formControlName="client" class="form-control" name="client" placeholder="Nombre cliente">
+                    <div class="mb-3 flex-fill">
+                        <input type="text" formControlName="client" [(ngModel)]="budget.client" class="form-control" name="client" placeholder="Nombre cliente">
                         <span class="form-text text-danger"
                         *ngIf="this.mainForm.controls['client'].errors && this.mainForm.controls['client'].touched" >
-                            Este campo es obligatorio y tener mas de 3 carácteres.
+                            Este campo es obligatorio y tener más de 3 carácteres.
                         </span>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 flex-fill">
                         <input type="text" formControlName="budgetName" [(ngModel)]="budget.budgetName" class="form-control" name="budgetName" placeholder="Nombre presupuesto">
                         <span class="form-text text-danger"
                         *ngIf="this.mainForm.controls['budgetName'].errors && this.mainForm.controls['budgetName'].touched" >
-                            Este campo es obligatorio y tener mas de 3 carácteres.
+                            Este campo es obligatorio y tener más de 3 carácteres.
+                        </span>
+                    </div>
+                    <div class="mb-3 flex-fill">
+                        <input type="date" formControlName="budgetDate" [(ngModel)]="budget.budgetDate" class="form-control" name="budgetDate" placeholder="Fecha presupuesto">
+                        <span class="form-text text-danger"
+                        *ngIf="this.mainForm.controls['budgetDate'].errors && this.mainForm.controls['budgetDate'].touched" >
+                            Este campo es obligatorio.
                         </span>
                     </div>
                 </div>
@@ -37,14 +44,14 @@
                                 [id]="product.name"
                                 [checked]="true">
                         <label class="form-check-label" [attr.for]="product.name" (change)="true">
-                            {{product.text}} ({{product.price}}€)
+                            {{product.text}} ({{ product.price | currency:'EUR':'symbol':undefined:'es-ES' }})
                         </label>
                     </div>
                     
                     <app-panel (addToTotal)="setTotal()" [product]="product" [mainForm]="mainForm"></app-panel>
                     
                 </ng-container>
-                <div class="col-12 mt-2">Total: <span id="total">{{total}}€</span></div>
+                <div class="col-12 mt-2">Total: <span id="total">{{ total | currency:'EUR':'symbol':undefined:'es-ES' }}</span></div>
                 <button [disabled]="!this.mainForm.valid" type="submit" class="btn btn-primary mt-5">Guardar</button>
             </form>
         </div>
