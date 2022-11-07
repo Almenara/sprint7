@@ -1,0 +1,25 @@
+
+<div class="col-12">
+    <div class="d-flex justify-content-start align-items-center mt-5 gap-3">
+        <h3>Lista de presupuestos</h3>
+    </div>
+    
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let budget of budgetList">
+            <div class="d-flex w-100 justify-content-between"> 
+                <h5 class="mb-1">{{budget.client}} ({{budget.budgetName}})</h5>
+                <small>{{budget.total}} €</small>
+            </div>
+            <ng-container *ngFor="let product of budget.products">
+                <p class="mb-1">{{product.name}} 
+                    <ng-container *ngIf="product.features">
+                        <small *ngFor="let feature of product.features">
+                            {{feature.name}}({{feature.quantity}})
+                        </small>
+                    </ng-container>
+                </p>
+                
+            </ng-container>
+        </li> 
+    </ul>
+</div>
