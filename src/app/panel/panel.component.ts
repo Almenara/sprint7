@@ -28,7 +28,8 @@ export class PanelComponent implements OnInit {
   }
   
   sendToCart(e: Event, featureName: string,  featureId: number): void{
-    this.cartService.setFeaturesCart( this.product.id, { id: featureId, name: featureName , quantity: Number((e.target as HTMLInputElement).value) });
+    let value = Number((e.target as HTMLInputElement).value)
+    this.cartService.setFeaturesCart( this.product.id, { id: featureId, name: featureName , quantity: value });
   }
 
   up(featureId: number){
