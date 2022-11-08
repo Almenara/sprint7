@@ -1,0 +1,42 @@
+
+<div class="col-12 d-flex flex-column gap-3"  *ngIf="budgetListBackUp.length > 0">
+    <div class="d-flex justify-content-start align-items-center mt-4">
+        <h3>Lista de presupuestos</h3>
+    </div>
+    <div class="input-group" *ngIf="budgetListBackUp.length > 1">
+        <input type="text" class="form-control" (input)="searchByBudgetName()" [(ngModel)]="searchText" placeholder="Nombre del presupuesto..." aria-label="Recipient's username">
+        <button class="btn btn-secondary" type="button" (click)="deleteSearch()" id="button-addon2">X</button>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group"  *ngIf="budgetListBackUp.length > 1">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label #resetOrderBtn (click)="sortById()" class="btn btn-outline-primary" for="btnradio1">Orden inicial</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label (click)="sortByClient()" class="btn btn-outline-primary" for="btnradio2">Alfabetico</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label (click)="sortByDate()" class="btn btn-outline-primary" for="btnradio3">Fecha</label>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let budget of budgetList">
+            <div class="d-flex w-100 justify-content-between"> 
+                <h5 class="mb-1">{{budget.client}} ({{budget.budgetName}}) - {{ budget.total | currency:'EUR':'symbol':undefined:'es-ES' }}</h5>
+                <small>{{budget.budgetDate | date:'mediumDate' }}</small>
+            </div>
+            <ng-container *ngFor="let product of budget.products">
+                <p class="mb-0" >
+                    <b>{{product.name}}</b>
+                </p>
+                <ng-container class="ms-4" *ngIf="product.features.length > 0">
+                    <p>
+                        <small class="ms-4 mb-3 text-capitalize">
+                            <ng-container *ngFor="let feature of product.features">
+                                {{ feature.name | titlecase }}({{feature.quantity}}) 
+                            </ng-container>
+                        </small>
+                    </p>
+                </ng-container>
+            </ng-container>
+        </li> 
+    </ul>
+</div>
