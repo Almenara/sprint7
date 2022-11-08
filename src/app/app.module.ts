@@ -13,7 +13,6 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ModalComponent } from './modal/modal.component';
 import { BudgetListComponent } from './budget-list/budget-list.component';
-import { SortPipe } from './pipes/sort.pipe';
 
 const appRoutes:Routes = [
   {path: "", component:HomeComponent},
@@ -28,8 +27,7 @@ const appRoutes:Routes = [
     ErrorPageComponent,
     WelcomePageComponent,
     ModalComponent,
-    BudgetListComponent,
-    SortPipe
+    BudgetListComponent
   ],
   imports: [
     BrowserModule,

@@ -11,14 +11,10 @@ import { product_cart, product_cart_feature } from '../cart.interface'
 })
 export class CartService {
   private _cartProducts:product_cart[] = [];
-  private _cartList:cart[] = [];
   private _budgetList:Budget[] = [];
 
   get cart(): product_cart[] {
     return [...this._cartProducts];
-  }
-  get cartList(): cart[] {
-    return [...this._cartList];
   }
 
   constructor(private totalSevice: TotalService, private productsService:ProductsService) { }
@@ -56,10 +52,12 @@ export class CartService {
         this.addFeatureToCart(productId, feature);
       
     }
+    
   }
 
   addFeatureToCart(productId:number, feature:product_cart_feature){
-    if(feature.quantity > 0) this._cartProducts.filter(product => product.id == productId)[0].features.push(feature)
+    let f = {...feature};
+    if(feature.quantity > 0) this._cartProducts.filter(product => product.id == productId)[0].features.push(f);
   }
 
   removeFeatureToCart(productId:number, feature:product_cart_feature){
@@ -86,11 +84,19 @@ export class CartService {
   }
 
   saveBudget(budget:Budget){
-    budget.products = this._cartProducts.slice();
-    budget.id = this._budgetList.length;
-    this._budgetList.push(Object.assign({},budget))
+    //budget.products = this._cartProducts.slice();
+    //this._budgetList.push(JSON.parse(JSON.stringify(budget)))
+    budget.products = [...this._cartProducts];
+    let b = {...budget}
+    b.id = this._budgetList.length;
+    this._budgetList.push(b);
+    this._cartProducts = [];
   }
   getBugetList(){
     return this._budgetList;
+  }
+  reset(){
+    this._budgetList = [];
+    this._cartProducts = [];
   }
 }

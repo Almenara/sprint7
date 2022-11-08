@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-start align-items-center mt-5 gap-3">
-                <a routerLink="/" class="btn btn-secondary"> < </a>
+                <a routerLink="/" class="btn btn-secondary" (click)="reset()"> < </a>
                 <h1>¿Qué quieres hacer?</h1>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     
                 </ng-container>
                 <div class="col-12 mt-2">Total: <span id="total">{{ total | currency:'EUR':'symbol':undefined:'es-ES' }}</span></div>
-                <button [disabled]="!this.mainForm.valid" type="submit" class="btn btn-primary mt-5">Guardar</button>
+                <button [disabled]="!this.mainForm.valid || this.total == 0" type="submit" class="btn btn-primary mt-5">Guardar</button>
             </form>
         </div>
         <div class="col-12 col-lg-5">

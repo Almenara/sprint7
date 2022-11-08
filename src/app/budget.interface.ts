@@ -1,6 +1,6 @@
 
 export interface Budget{
-    id?: number,
+    id: number,
     client: string,
     budgetName: string,
     budgetDate?: Date | null,
