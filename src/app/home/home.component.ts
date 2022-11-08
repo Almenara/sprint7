@@ -1,9 +1,10 @@
 import { Budget } from './../budget.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CartService } from './../services/cart.service';
 import { ProductsService } from './../services/products.service';
+import { BudgetListComponent } from '../budget-list/budget-list.component';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { ProductsService } from './../services/products.service';
 })
 export class HomeComponent implements OnInit {
   
+  @ViewChild(BudgetListComponent) budgetListCmp:BudgetListComponent;
+
   public mainForm: FormGroup = this.fb.group({
     client: ["", [Validators.required, Validators.minLength(3)]],
     budgetName: ["", [Validators.required, Validators.minLength(3)]],
@@ -21,6 +24,7 @@ export class HomeComponent implements OnInit {
   })
 
   public budget: Budget = {
+    id: 0,
     client: "",
     budgetName: "",
     budgetDate: null
@@ -68,5 +72,6 @@ export class HomeComponent implements OnInit {
   saveBudget(){
     this.budget.total = this.total
     this.cartService.saveBudget(this.budget);
+    this.budgetListCmp.deleteSearch()
   }
 }

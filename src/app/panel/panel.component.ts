@@ -13,7 +13,7 @@ export class PanelComponent implements OnInit {
   @Input() product : product;
   @Input() mainForm : FormGroup;
   @Output() addToTotal = new EventEmitter();
-  
+
   //panelForm: FormGroup = this.fb.group({})
 
   constructor( private cartService: CartService, private fb: FormBuilder ) {
