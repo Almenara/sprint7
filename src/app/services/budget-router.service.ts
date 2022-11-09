@@ -11,7 +11,7 @@ export class BudgetRouterService {
 
   changeRoute(obj:{}){
     this.router.navigate(
-      [] , 
+      [], 
       {
         relativeTo: this.activatedRoute,
         queryParams: obj,
@@ -20,3 +20,4 @@ export class BudgetRouterService {
     )
   }
 }
+
