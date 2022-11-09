@@ -1,11 +1,12 @@
+import { BudgetRouterService } from './../services/budget-router.service';
 import { Budget } from './../budget.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CartService } from './../services/cart.service';
 import { ProductsService } from './../services/products.service';
 import { BudgetListComponent } from '../budget-list/budget-list.component';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -40,22 +41,28 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService, 
-    private cartService: CartService, 
+    private cartService: CartService,
+    private budgetRouter: BudgetRouterService,
     private fb: FormBuilder,
-    private route: ActivatedRoute) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    ) {
   }
 
   ngOnInit(): void {
-    this.route.queryParams
-    .subscribe(params => {
-      this.budget.client = params['client'];
-      this.budget.budgetName = params['budgetName'];
-      let date = params['budgetDate'].split("/")
-      if(date.length == 3){
-        this.budget.budgetDate = new Date(Number(date[2]), Number(date[1]), Number(date[0]));
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        this.budget.client = params['client'];
+        this.budget.budgetName = params['budgetName'];
+        //let date = params['budgetDate'].split("/")
+        //if(date.length == 3){
+        //  this.budget.budgetDate = new Date(Number(date[2]), Number(date[1]), Number(date[0]));
+        //}
       }
-    }
-  );
+    );
+    
+    
+    //console.log(this.router.)
   }
 
   sendToCart(productId:number, productName:string, e:Event){
@@ -79,7 +86,6 @@ export class HomeComponent implements OnInit {
         }
       })
     }
-
     this.setTotal();
     
   }

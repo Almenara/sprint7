@@ -1,5 +1,5 @@
+import { BudgetRouterService } from './budget-router.service';
 import { Budget } from './../budget.interface';
-import { cart } from './../cart.interface';
 import { ProductsService } from './products.service';
 import { TotalService } from './total.service';
 import { Injectable } from '@angular/core';
@@ -17,14 +17,21 @@ export class CartService {
     return [...this._cartProducts];
   }
 
-  constructor(private totalSevice: TotalService, private productsService:ProductsService) { }
+  constructor(
+    private totalSevice: TotalService, 
+    private productsService:ProductsService,
+    private budgetRouter: BudgetRouterService,
+    ) { }
 
   setCart(productToCart:{productId: number, productName: string, featureId?: null, quantity: number}): void{
     let productExist = this.cart.filter(product => product.id == productToCart.productId)[0];
+    
     if(!productExist && productToCart.quantity != 0)
         this.addProductToCart({id : productToCart.productId, name : productToCart.productName, quantity : productToCart.quantity, features : []} as unknown as product_cart);
     else
         this.removeProductToCart({id : productToCart.productId, quantity : productToCart.quantity, features : []} as unknown as product_cart);
+    
+    //this.budgetRouter.changeRoute(this._cartProducts);
   }
 
   addProductToCart(product:product_cart){
@@ -52,7 +59,7 @@ export class CartService {
         this.addFeatureToCart(productId, feature);
       
     }
-    
+    //this.budgetRouter.changeRoute(this._cartProducts);    
   }
 
   addFeatureToCart(productId:number, feature:product_cart_feature){
@@ -89,6 +96,7 @@ export class CartService {
     budget.products = [...this._cartProducts];
     let b = {...budget}
     b.id = this._budgetList.length;
+    this.budgetRouter.changeRoute(b)
     this._budgetList.push(b);
     this._cartProducts = [];
   }
